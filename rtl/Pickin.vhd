@@ -369,8 +369,8 @@ with cpu_addr(15 downto 11) select
 		wram2_do          when "01110", -- 7000-77ff
  		tile_ram_do       when "10001", -- 8800-8bff
 		color_ram_do      when "10011", -- 9800-9fff (ram only at 9800-9bff) 
-		-- not("11111110")   when "10101", -- a800 	DIP SWITCH
-		not(I_DIP_SW)   when "10101", -- a800 	DIP SWITCH
+		not("11111110")   when "10101", -- a800 	DIP SWITCH
+		--not(I_DIP_SW)   when "10101", -- a800 	DIP SWITCH
 		"00000000"        when others;
 
 

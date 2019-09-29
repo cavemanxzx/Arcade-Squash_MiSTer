@@ -239,8 +239,8 @@ wire m_fire_2 = btn_fire_2 | joy2[4];
 wire m_paddle_left_2   = btn_paddle_left_2 | joy2[5];
 wire m_paddle_right_2   = btn_paddle_right_2 | joy2[6];
 
-wire m_start1 = btn_one_player  | joy[5] | joy2[5];
-wire m_start2 = btn_two_players | joy[6] | joy2[6];
+wire m_start1 = btn_one_player  | joy[7] | joy2[7];
+wire m_start2 = btn_two_players | joy[8] | joy2[8];
 wire m_coin   = m_start1 | m_start2;
 
 wire hblank, vblank;
@@ -312,10 +312,10 @@ Pickin Pickin
 	.coin1(m_coin|btn_coin_1|btn_coin_2),
   
 	.fire1(m_fire),
-	.right1(m_paddle_right),
-	.left1(m_paddle_left),
-	.down1(m_down),
-	.up1(m_up),
+	.right1(m_right),
+	.left1(m_left),
+	.down1(m_paddle_right),
+	.up1(m_paddle_left),
 
 	.fire2(m_fire_2),
 	.right2(m_paddle_right_2),
