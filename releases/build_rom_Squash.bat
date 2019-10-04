@@ -1,7 +1,7 @@
 @echo off
 
 set    zip=squaitsa.zip
-set ifiles=sq5.3.9e+sq6.4.9f+sq7.5.9j+sq5.3.9e+sq6.4.9f+sq7.5.9j+sq5.3.9e+sq6.4.9f+sq2.1.1e+sq1.1c+sq4.2.1j+sq3.1f+mmi6331.3p+mmi6331.3
+set ifiles=sq5.3.9e+sq6.4.9f+sq7.5.9j+sq5.3.9e+sq6.4.9f+sq7.5.9j+sq5.3.9e+sq6.4.9f+sq2.1.1e+sq1.1c+sq4.2.1j+sq3.1f+mmi6331.3p+mmi6331.3r
 set  ofile=a.squash.rom
 
 rem =====================================
