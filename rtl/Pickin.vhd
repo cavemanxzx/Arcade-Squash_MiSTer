@@ -20,7 +20,7 @@ port(
   video_vblank : out std_logic;
   video_hs     : out std_logic;
   video_vs     : out std_logic;
-  audio_out    : out std_logic_vector(15 downto 0);
+  audio_out    : out std_logic_vector(12 downto 0);
 
   dn_addr    : in  std_logic_vector(15 downto 0);
   dn_data    : in  std_logic_vector(7 downto 0);
@@ -147,10 +147,13 @@ signal color_ram_cs  : std_logic;
 
 -- data bus from AY-3-8910
 signal ym_8910_data : std_logic_vector(7 downto 0);
-
+signal ym_8910_data2 : std_logic_vector(7 downto 0);
+signal ym2_we_n  : std_logic;
 -- audio
 signal ym_8910_audio : std_logic_vector(7 downto 0);
 signal ym_8910_audio2 : std_logic_vector(7 downto 0);
+signal music         : unsigned(12 downto 0);
+signal music2         : unsigned(12 downto 0);											 
 
 
 -- player I/O 
@@ -308,6 +311,7 @@ wram2_we    <= '1' when cpu_mreq_n = '0' and cpu_wr_n = '0' and cpu_addr(15 down
 tile_ram_cs       <= '1' when cpu_addr(15 downto 10) = "100010"   else '0'; -- 8800-8bff
 color_ram_cs      <= '1' when cpu_addr(15 downto 11) = "10011"    else '0'; -- 9800-9fff
 
+ym2_we_n      <= '0' when cpu_addr(15 downto 11) = "10111"    else '1'; -- 1011100000000000
 
 ---------------------------
 -- enable/disable interrupt
@@ -392,7 +396,9 @@ cpu_di <= ym_8910_data when cpu_iorq_n = '0' else cpu_di_mem;
 -----------------------
 -- mux sound and music
 -----------------------
-audio_out <= ym_8910_audio & ym_8910_audio2;
+music     <= "0000" & unsigned(ym_8910_audio) & '0';
+music2    <= "0000" & unsigned(ym_8910_audio2) & '0';
+audio_out <= std_logic_vector(music + music2);
 
 -------------------------------------
 -- color ram addressing scheme 
@@ -661,7 +667,7 @@ ym2149_2 : entity work.ym2149
 port map (
 -- data bus
 	I_DA        => cpu_do,
-	O_DA        => open,--ym_8910_data2,
+	O_DA        => ym_8910_data2,
 	O_DA_OE_L   => open,
 -- control
 	I_A9_L      => sound2_cs_n,
